@@ -1,76 +1,41 @@
-function calcular_prestamo( monto , cuotas ){
-
+function calcularPrestamo(monto, cuotas) {
     monto = parseFloat(monto);
     cuotas = parseInt(cuotas);
 
-    let prestamo_final = 0;
+    let prestamoFinal = 0;
 
-    if( cuotas == 1 && monto > 0){
-        return monto
+    if (cuotas === 1 && monto > 0) {
+        return monto;
+    } else if (cuotas === 3 && monto > 0) {
+        prestamoFinal = monto + monto * 0.1;
+        return prestamoFinal;
+    } else if (cuotas === 6 && monto > 0) {
+        prestamoFinal = monto + monto * 0.2;
+        return prestamoFinal;
+    } else if (cuotas === 12 && monto > 0) {
+        prestamoFinal = monto + monto * 0.4;
+        return prestamoFinal;
     }
-    else if( cuotas == 3 && monto > 0){
-        prestamo_final = monto + (monto * 0.25);
-        return prestamo_final
-    }
-    else if( cuotas == 6 && monto > 0 ){
-        prestamo_final = monto + (monto * 0.60);
-        return prestamo_final
-    }
-    else if( cuotas == 12  && monto > 0){
-        prestamo_final = monto + (monto * 1);
-        return prestamo_final
-    }
-
-    
 }
 
+console.log("Bienvenidos/as a préstamos del Banco BCI");
 
-function descuento( prestamo , es_socio ){
+let monto = "";
 
-    if( es_socio == "SI" ){
-
-        let descuento_socio = prestamo - ( prestamo * 0.20 );
-        return descuento_socio
-    }
-    else{
-        return 0
-    }
-
-
-}
-
-
-
-
-
-// PRESTAMO //
-
-console.log("Bienvenidos/as a prestamos NOW");
-
-let monto = 0;
-
-
-while( monto != "FIN" ){
-
+while (monto !== "FIN") {
     monto = prompt("Ingrese el monto que desea solicitar o FIN");
-    if( monto != "FIN"){
-        let cuotas = prompt("Ingrese la cantidad de cuotas: 1, 3, 6 y 12");
-        let es_socio = prompt("Es socio: SI o NO");
 
-        let resultado_del_prestamo = calcular_prestamo( monto , cuotas );
-        let resultado_del_descuento = descuento( resultado_del_prestamo , es_socio );
+    if (monto !== "FIN") {
+        let cuotas = prompt("Ingrese la cantidad de cuotas: 1, 3, 6 o 12");
 
-        console.log("Pediste: ", monto);
-        console.log("Cuotas: ", cuotas);
-        console.log("Devolves: ", resultado_del_prestamo );
+        let resultadoPrestamo = calcularPrestamo(monto, cuotas);
+        let valorCuota = Math.floor(resultadoPrestamo / cuotas);
 
-
-        if( resultado_del_descuento != 0){
-            console.log("Con descuento del 20% por se socio pagas: ", resultado_del_descuento);
-        }
-    }
-    else{
-        console.log("Muchas gracias");
+    console.log("Pediste:", monto);
+    console.log("Cuotas:", cuotas);
+    console.log("Monto Total a devolver:", resultadoPrestamo);
+    console.log("Valor Cuota:", valorCuota);
+    } else {
+    console.log("¡Muchas gracias por utilizar nuestros servicios!");
     }
 }
-
